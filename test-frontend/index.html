@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTPS 測試網站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 90%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .status {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .info {
+            margin: 1rem 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .ssl-indicator {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .timestamp {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+        
+        .feature-list {
+            text-align: left;
+            margin: 2rem 0;
+        }
+        
+        .feature-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 HTTPS 測試成功！</h1>
+        
+        <div class="ssl-indicator">
+            🔒 SSL 安全連接已建立
+        </div>
+        
+        <div class="status">
+            <strong>✅ 網站運行正常</strong><br>
+            域名：<span id="domain">billyziiii.gofun.cloud</span>
+        </div>
+        
+        <div class="info">
+            <h3>🎯 測試項目</h3>
+            <ul class="feature-list">
+                <li>HTTPS 安全連接</li>
+                <li>Cloudflare SSL 證書</li>
+                <li>DNS 解析正常</li>
+                <li>靜態網站部署</li>
+                <li>響應式設計</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <strong>🌐 協議：</strong> <span id="protocol">HTTPS</span><br>
+            <strong>🏠 主機：</strong> <span id="hostname">-</span><br>
+            <strong>🔗 端口：</strong> <span id="port">443</span>
+        </div>
+        
+        <div class="timestamp">
+            <strong>⏰ 載入時間：</strong> <span id="timestamp">-</span>
+        </div>
+    </div>
+
+    <script>
+        // 顯示當前頁面信息
+        document.getElementById('protocol').textContent = window.location.protocol.toUpperCase();
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('port').textContent = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('zh-TW');
+        
+        // 檢查 SSL 狀態
+        if (window.location.protocol === 'https:') {
+            console.log('✅ HTTPS 連接成功建立');
+        } else {
+            console.log('⚠️ 當前使用 HTTP 連接');
+        }
+        
+        // 簡單的連接測試
+        fetch(window.location.origin)
+            .then(response => {
+                console.log('✅ 網站響應正常:', response.status);
+            })
+            .catch(error => {
+                console.log('❌ 連接錯誤:', error);
+            });
+    </script>
+</body>
+</html>
