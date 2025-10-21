@@ -6,7 +6,7 @@ FROM python:3.11-alpine
 WORKDIR /app
 
 # 複製 HTML 文件
-COPY test-frontend/index.html .
+COPY index.html .
 
 # 暴露端口 8000
 EXPOSE 8000
