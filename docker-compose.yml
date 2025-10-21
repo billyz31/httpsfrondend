@@ -9,7 +9,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - FRONTEND_URL=http://frontend:3000
+      - FRONTEND_URL=https://billyziiii.gofun.cloud
     expose:
       - "3001"
     networks:
