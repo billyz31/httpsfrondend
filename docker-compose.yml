@@ -9,9 +9,16 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
+      # Frontend URL for CORS configuration
       - FRONTEND_URL=https://billyziiii.gofun.cloud
-    ports:
-      - "3001:3001"
+      # Backend API URL (for internal reference)
+      - API_URL=https://api.billyziiii.gofun.cloud
+    # Remove port exposure for Coolify deployment (Traefik handles routing)
+    # For local testing, uncomment the ports section below:
+    # ports:
+    #   - "3001:3001"
+    expose:
+      - "3001"
     networks:
       - app-network
     # Temporarily disable health check for debugging
@@ -29,8 +36,17 @@ services:
       dockerfile: Dockerfile
     container_name: test-website-frontend
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    environment:
+      # API URL for frontend to connect to backend
+      - REACT_APP_API_URL=https://api.billyziiii.gofun.cloud
+      # Alternative: Use internal container communication
+      # - REACT_APP_API_URL=http://backend:3001
+    # Remove port exposure for Coolify deployment (Traefik handles routing)
+    # For local testing, uncomment the ports section below:
+    # ports:
+    #   - "3000:3000"
+    expose:
+      - "3000"
     depends_on:
       - backend
     networks:
